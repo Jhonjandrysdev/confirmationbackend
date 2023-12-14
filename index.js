@@ -1,7 +1,10 @@
+const fs = require('fs');
 const express = require('express')
 
 const multer = require('multer');
 const upload = multer();
+
+
 
 
 const app = express()
@@ -13,10 +16,21 @@ app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 
 app.post('/transaccion',upload.none(), (req, res) => {
-  console.log(req.body, req.params);
+  const bodyEnString = JSON.stringify(req.body)
+  console.log(bodyEnString, req.params);
+  fs.writeFile("confirmation.txt",bodyEnString, function(err) {
+    if(err) {
+        return console.log(err);
+    }
+    console.log("The file was saved!");
+}); 
   res.json({name:'jonji2'})
 })
 
+app.get('/obtener-archivo',(req,res)=>{
+   
+  res.sendFile(__dirname + '/confirmation.txt')
+})
 app.listen(port, () => {
   console.log(`Example app listening on port ${port}`)
 })
