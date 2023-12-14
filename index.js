@@ -33,7 +33,7 @@ app.get('/obtener-archivo', (req, res) => {
   datos = datos + JSON.stringify(req.body);
 
   // Escribir los datos en el archivo
-  fs.writeFile(file, datos, function(err) {
+  fs.writeFile(file, datos, {flag: 'a'}, function(err) {
     if(err) {
       return console.log(err);
     }
