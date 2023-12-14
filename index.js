@@ -4,9 +4,6 @@ const express = require('express')
 const multer = require('multer');
 const upload = multer();
 
-
-
-
 const app = express()
 const port = process.env.PORT || 3000;
 
@@ -29,7 +26,7 @@ app.post('/transaccion',upload.none(), (req, res) => {
 
 app.get('/obtener-archivo',(req,res)=>{
    
-  res.sendFile(__dirname + '/confirmation.txt')
+  res.sendFile(file)
 })
 app.listen(port, () => {
   console.log(`Example app listening on port ${port}`)
