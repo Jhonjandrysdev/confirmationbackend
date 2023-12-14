@@ -4,20 +4,17 @@ const express = require('express')
 const multer = require('multer');
 const upload = multer();
 
-
-
 const app = express()
 const port = process.env.PORT || 3000;
-
 
 var bodyParser = require("body-parser");
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
-const file = __dirname + '/confirmation.txt';
+
 app.post('/transaccion',upload.none(), (req, res) => {
   const bodyEnString = JSON.stringify(req.body)
   console.log(bodyEnString, req.params);
-  fs.writeFile(file,bodyEnString, function(err) {
+  fs.writeFile(bodyEnString, function(err) {
     if(err) {
         return console.log(err);
     }
